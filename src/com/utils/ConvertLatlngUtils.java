@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 public class ConvertLatlngUtils {
 
 	// 经纬度度分秒转换为小数
-	public double convertToDecimal(double du, double fen, double miao) {
+	public static double convertToDecimal(double du, double fen, double miao) {
 		if (du < 0)
 			return -(Math.abs(du) + (Math.abs(fen) + (Math.abs(miao) / 60)) / 60);
 
@@ -13,7 +13,7 @@ public class ConvertLatlngUtils {
 	}
 
 	// 以字符串形式输入经纬度的转换
-	public double convertToDecimalByString(String latlng) {
+	public static double convertToDecimalByString(String latlng) {
 
 		double du = Double
 				.parseDouble(latlng.substring(0, latlng.indexOf("°")));
@@ -28,7 +28,7 @@ public class ConvertLatlngUtils {
 	}
 
 	// 将小数转换为度分秒
-	public String convertToSexagesimal(double num) {
+	public static String convertToSexagesimal(double num) {
 
 		int du = (int) Math.floor(Math.abs(num)); // 获取整数部分
 		double temp = getdPoint(Math.abs(num)) * 60;
@@ -42,28 +42,13 @@ public class ConvertLatlngUtils {
 	}
 
 	// 获取小数部分
-	public double getdPoint(double num) {
+	public static double getdPoint(double num) {
 		double d = num;
 		int fInt = (int) d;
 		BigDecimal b1 = new BigDecimal(Double.toString(d));
 		BigDecimal b2 = new BigDecimal(Integer.toString(fInt));
 		double dPoint = b1.subtract(b2).floatValue();
 		return dPoint;
-	}
-
-	public static void main(String[] args) {
-
-		ConvertLatlngUtils convert = new ConvertLatlngUtils();
-		double latlng1 = convert.convertToDecimal(37, 25, 19.222);
-		double latlng2 = convert.convertToDecimalByString("-37°25′19.222″");
-		String latlng3 = convert.convertToSexagesimal(121.084095);
-		String latlng4 = convert.convertToSexagesimal(-121.084095);
-
-		System.out.println("转换小数(数字参数)" + latlng1);
-		System.out.println("转换小数(字符串参数)" + latlng2);
-		System.out.println("转换度分秒:" + latlng3);
-		System.out.println("转换度分秒:" + latlng4);
-
 	}
 
 	/**
@@ -74,7 +59,7 @@ public class ConvertLatlngUtils {
 	 * @return 度时double分数组
 	 */
 
-	public Double stringtodouble(String doublestr) {
+	public static Double stringtodouble(String doublestr) {
 		Double[] latlon = new Double[3];
 		String[] tmpstrs = doublestr.split(",");
 		for (int i = 0; i < tmpstrs.length; i++) {
@@ -94,7 +79,7 @@ public class ConvertLatlngUtils {
 	 *            传进来的double
 	 * @return 按照exif形式的经纬度字符串字符串 31/1,28/1,14304/1000
 	 */
-	public String doubletostring(double num) {
+	public static String doubletostring(double num) {
 		int du = (int) Math.floor(Math.abs(num)); // 获取整数部分
 		double temp = getdPoint(Math.abs(num)) * 60;
 		int fen = (int) Math.floor(temp); // 获取整数部分
