@@ -1,22 +1,12 @@
 package com.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 /*
  * 工具类，做字符串处理
  */
 public class ChatUtils {
-	private static ChatUtils utils;
-
-	private ChatUtils() {
-		super();
-	}
-
-	public static ChatUtils getInstance() {
-		if (utils == null)
-			utils = new ChatUtils();
-		return utils;
-	}
 
 	// byte数组转为十六进制字符
 	public static String bytesToHexString(byte[] src) {
@@ -76,5 +66,21 @@ public class ChatUtils {
 		}
 		return null;
 	}
-
+	//byte数组转换成byte集合
+	public static ArrayList<Byte> convertArrayToList(byte[] src){
+		ArrayList<Byte> bytes = new ArrayList<Byte>();
+		for(int i=0;i<src.length;i++){
+			bytes.add(src[i]);
+		}
+		return bytes;
+	}
+	
+	//byte集合转换成byte数组
+	public static byte[] convertListToArray(ArrayList<Byte> src){
+		byte[] bytes = new byte[src.size()];
+		for(int i=0;i<src.size();i++){
+			bytes[i] = src.get(i);
+		}
+		return bytes;
+	}
 }
