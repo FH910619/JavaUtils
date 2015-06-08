@@ -1,7 +1,10 @@
 package com.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * 工具类，做字符串处理
@@ -153,5 +156,23 @@ public class ChatUtils {
         int value;
         value = (int) (((src[0] & 0xFF) << 24) | ((src[1] & 0xFF) << 16) | ((src[2] & 0xFF) << 8) | (src[3] & 0xFF));
         return value;
+    }
+
+    public static String DateToString(String formatter){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat(formatter);
+        return sdf.format(date);
+    }
+
+    public static Date StringToDate(String timeStr,String formatter){
+        String nowtime = new String(timeStr);
+        SimpleDateFormat sdf = new SimpleDateFormat(formatter);
+        try {
+            Date date = sdf.parse(nowtime);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
